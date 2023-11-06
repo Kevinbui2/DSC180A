@@ -5,7 +5,7 @@ import requests
 from PIL import Image
 from io import BytesIO
 import IPython.display as display
-import json # Test 123
+import json
 
 load_dotenv()
 # %%
