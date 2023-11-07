@@ -67,7 +67,7 @@ def get_image(lat, long, size = '640x400', fov = 90, heading = 0, pitch = 0, sho
         if show:
             img = Image.open(BytesIO(response.content))
             display.display(img)
-        else:
+        if save_path:
             with open(save_path, 'wb') as image_file:
                 image_file.write(response.content)
     else:
@@ -86,8 +86,6 @@ for name, struc in all_structures.items():
     subfolder_name = os.path.join(parent_dir, name)
     if not os.path.exists(subfolder_name):
         os.mkdir(subfolder_name)
-    #if name[0] == 'D' or name in []:
-    #    continue
     print(name)
     for i in range(len(struc['lat'])):
         for index, zoom in enumerate([5, 10, 15]):
@@ -97,7 +95,7 @@ for name, struc in all_structures.items():
                 fov = struc['fov'] + zoom,
                 heading = struc['heading'][i],
                 pitch = struc['pitch'],
-                show = True
-                #save_path = os.path.join(subfolder_name, f'{name}_{i}_{index}.jpg')
+                show = False,
+                save_path = os.path.join(subfolder_name, f'{name}_{i}_{index}.jpg')
             )
 # %%
